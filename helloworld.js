@@ -1,7 +1,7 @@
 function buildWindow() {
 	var win = new Ext.Window({
 		id : 'myWindow',
-		title : 'My first Ext JS Window',
+		title : 'My first Ext JS Window ralative path',
 		width : 300,
 		height : 150,
 		layout : 'fit',
@@ -13,3 +13,6 @@ function buildWindow() {
 	win.show();
 }
 Ext.onReady(buildWindow);
+Ext.onReady(function() {
+Ext.MessageBox.alert('Hello', 'The DOM is ready!');
+});
