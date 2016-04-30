@@ -1,0 +1,9 @@
+<div>Hello from the <b>world</b> of Ajax!</div>
+<script type='text/javascript'>
+function highlightWindow() {
+	var win = Ext.getCmp('myWindow');
+	var winBody = win.body;
+	winBody.fadeIn({ endOpacity: .75, duration: 2});
+}
+highlightWindow.defer(1000);
+</script>
