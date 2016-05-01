@@ -12,7 +12,11 @@ function buildWindow() {
 	});
 	win.show();
 }
+
 Ext.onReady(buildWindow);
-Ext.onReady(function() {
-Ext.MessageBox.alert('Hello', 'The DOM is ready!');
-});
+function setHeight(){
+	var myDiv1 = Ext.get('div1');
+	myDiv1.setHeight(200);
+}
+Ext.onReady(setHeight);
+
