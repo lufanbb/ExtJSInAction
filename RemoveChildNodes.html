@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="extjs-3.1.0-src/resources/css/ext-all.css" />
+<script type="text/javascript" src="extjs-3.1.0-src/adapter/ext/ext-base-debug.js"></script>
+<script type="text/javascript" src="extjs-3.1.0-src/ext-all-debug.js"></script>
+<script type="text/javascript">
+	Ext.BLANK_IMAGE_URL = 'extjs-3.1.0-src/resources/images/default/s.gif';
+</script>
+<!-- <script type="text/javascript" src="RemoveNodes.js"></script> -->
+<!-- <script type="text/javascript" src="loadHtml.js"></script> -->
+<script type="text/javascript" src="CreateTemplate.js"></script>
+<style type="text/css">
+.sameClass {
+	border: 1px solid #AAAAAA;
+	width: 200px;
+	height: 100px;
+	cursor: pointer;
+	padding: 2px 2px 2px 2px;
+	margin: 2px 2px 2px 2px;
+}
+</style>
+
+
+<title>RemoveChildNodes</title>
+</head>
+<body>
+	<div id='div1' class="myDiv">
+		<div id='child1'>Child 1</div>
+		<div class='child2'>Child 2</div>
+		<div class='child3'>Child 3</div>
+		<div id='child4' class='sameClass'>
+			<div id="nestedChild1" class='sameClass'>Nest Child 1</div>
+		</div>
+		<div>Child 5</div>
+	</div>
+</body>
+</html> 
