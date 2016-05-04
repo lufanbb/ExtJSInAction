@@ -9,7 +9,3 @@ function removeChildFromChaining(){
 
 Ext.onReady(removeChildFromSelector);
 Ext.onReady(removeChildFromChaining);
-Ext.getBody().load({
-	url		: 'htmlFragment.html',
-	scripts	: true
-});
