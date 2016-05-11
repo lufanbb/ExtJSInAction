@@ -1,3 +1,6 @@
+/**
+ * A easy way for create a window with two panels
+ */
 // new Ext.Window({
 // 	width: 200,
 // 	height: 150,
@@ -46,12 +49,13 @@ new Ext.Window({
 
 function renderPanel() {
 	var myPanel = new Ext.Panel({
+		renderTo : 'myDiv',
 		height: 50,
 		width: 150,
 		title: 'Lazy rendered Panel',
 		frame: true
 	});
-	myPanel.render('myDiv2');
+	// myPanel.render('myDiv2');
 }
 
 Ext.onReady(renderPanel);
