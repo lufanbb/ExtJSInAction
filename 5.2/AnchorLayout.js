@@ -1,21 +1,18 @@
 var myWin = new Ext.Window({
-	height: 500,
+	height: 340,
 	width: 300,
 	layout: 'anchor',
 	border: false,
 	anchorSize: '400',
-	autoScroll: false,
+	autoScroll: true,
 	items: [{
 		title: 'Panel1',
-		anchor: '-50, -400',
+		anchor: '-50, -150',
 		frame: true
 	}, {
 		title: 'Panel2',
-		anchor: '0, 30%',
-		frame: true
-	}, {
-		title: 'Panel3',
-		anchor: '-10, -50',
+		height: '150',
+		anchor: '-10',
 		frame: true
 	}]
 });
