@@ -1,10 +1,11 @@
 new Ext.Window({
-	layout: 'hbox',
+	//layout: 'hbox',
+	layout: 'vbox',
 	height: 300,
 	width: 300,
 	title: 'A Container with an HBox layout',
 	layoutConfig: {
-		pack: 'center',
+		pack: 'top',
 		align: 'stretch'
 	},
 	defaults: {
@@ -15,10 +16,9 @@ new Ext.Window({
 		height: 100
 	}, {
 		title: 'Panel 2',
-		height: 75,
-		width: 100
+		height: 100
 	}, {
 		title: 'Panel 3',
-		height: 200
+		height: 80
 	}]
 }).show();

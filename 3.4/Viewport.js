@@ -11,5 +11,11 @@ new Ext.Viewport({
 	}, {
 		region: 'center',
 		title: 'No, this region rules!'
+	}, {
+		region: 'south',
+		title: 'No, south region rules!'
+	}, {
+		region: 'east',
+		title: 'No, east region rules!'
 	}]
 });
