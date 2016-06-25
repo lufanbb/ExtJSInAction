@@ -27,6 +27,20 @@ var fpItems = [{
 	fieldLabel: 'File',
 	allowBlank: false,
 	inputType: 'file'
+}, {
+	xtype: 'textarea',
+	fieldLabel: 'My TextArea',
+	name: 'myTextArea',
+	anchor: '100%',
+	height: 100
+}, {
+	xtype: 'numberfield',
+	fieldLabel: 'Numbers only',
+	allowBlank: false,
+	emptyText: 'This field is empty!',
+	decimalPrecision: 3,
+	minValue: 0.001,
+	maxValue: 2
 }];
 var myValidFn = function(v) {
 	var myRegex = /https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w/_\.]*(\?\S+)?)?)?/;
