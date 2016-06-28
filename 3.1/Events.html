@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../extjs-3.1.0-src/resources/css/ext-all.css" />
+    <script type="text/javascript" src="../extjs-3.1.0-src/adapter/ext/ext-base-debug.js"></script>
+    <script type="text/javascript" src="../extjs-3.1.0-src/ext-all-debug.js"></script>
+    <script type="text/javascript">
+    Ext.BLANK_IMAGE_URL = '../extjs-3.1.0-src/resources/images/default/s.gif';
+    </script>
+    <script type="text/javascript" src="Events.js"></script>
+    <script type="text/javascript" src="SoftwareDrivenEvents.js"></script>
+    <style type="text/css">
+    .myDiv {
+        border: 1px solid #AAAAAA;
+        width: 200px;
+        height: 35px;
+        cursor: pointer;
+        padding: 2px 2px 2px 2px;
+        margin: 2px 2px 2px 2px;
+    }
+    </style>
+    <title>Test EXT JS Event</title>
+</head>
+
+<body>
+    <div id='div1' class='myDiv'> </div>
+    <div id="myDiv2" onclick="alert(this.id + ' was clicked');">Click me</div>
+    <div id="myDiv">MyDiv Text<a href="#" id="myHref">My Href</a>
+    </div>
+    <h1>This is a Heading</h1>
+    <p>This is a paragraph.</p>
+</body>
+
+</html>
