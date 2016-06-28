@@ -116,6 +116,38 @@ var tabPanel = {
 	items: tabs
 }
 
+var onSuccessOrFail = function(form, action) {
+	var formPanel = Ext.getCmp('myFormPanel');
+	formPanel.el.unmask();
+	var result = action.result;
+	if (result.success) {
+		Ext.MessageBox.alert('Success', action.result.msg);
+	} else {
+		Ext.MessageBox.alert('Failure', action.result.msg);
+	}
+}
+
+var submitHandler = function() {
+	var formPanel = Ext.getCmp('myFormPanel');
+	formPanel.el.mask('Please wait', 'x-mask-loading');
+	formPanel.getForm().submit({
+		url: './success.true.txt',
+		success: onSuccessOrFail,
+		failure: onSuccessOrFail
+	});
+}
+
+var loadHandler = function() {
+	var formPanel = Ext.getCmp('myFormPanel');
+	formPanel.el.mask('Please wait', 'x-mask-loading');
+	formPanel.getForm().load({
+		url: './data.txt',
+		success: function() {
+			formPanel.el.unmask();
+		}
+	});
+}
+
 var myFormPanel = new Ext.form.FormPanel({
 	renderTo: Ext.getBody(),
 	width: 700,
@@ -124,11 +156,21 @@ var myFormPanel = new Ext.form.FormPanel({
 	frame: true,
 	id: 'myFormPanel',
 	layout: 'vbox',
+	beforeshow: loadHandler,
 	layoutConfig: {
 		align: 'stretch'
 	},
+	buttons: [{
+		text: 'Save',
+		handler: submitHandler
+	}, {
+		text: 'Load',
+		handler: submitHandler
+	}],
 	items: [
 		fieldsetContainer,
 		tabPanel
 	]
 });
+
+Ext.onReady(loadHandler);
