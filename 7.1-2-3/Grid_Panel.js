@@ -11,7 +11,7 @@ var arrayData = [
 	mapping: 1
 }, {
 	name: 'state',
-	mapping: 2
+	m|apping: 2
 }]);
 var arrayReader = new Ext.data.ArrayReader({}, nameRecord);
 var memoryProxy = new Ext.data.MemoryProxy(arrayData);
