@@ -141,10 +141,16 @@ var grid = {
 };
 
 new Ext.Window({
+	id: 'Window1',
 	height: 350,
 	width: 550,
 	border: false,
+	maximizable: true,
+	frame: true,
+	draggable: true,
 	resizable: true,
+	autoScroll: true,
+	closable: true,
 	layout: 'fit',
 	renderTo: Ext.getBody(),
 	items: grid
