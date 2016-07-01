@@ -35,7 +35,7 @@ var win2 = new Ext.Window({
 	html: 'Try to move or resize me. I dare you.',
 	plain: true,
 	border: false,
-	resizable: false,
+	resizable: true,
 	draggable: false,
 	closable: false,
 	buttonAlign: 'center',
