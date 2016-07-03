@@ -1,5 +1,10 @@
 var remoteProxy = new Ext.data.ScriptTagProxy({
-	url: 'http://extjsinaction.com/dataQuery.php'
+	api: {
+		read: 'http://extjsinaction.com/dataQuery.php',
+		create: 'http://extjsinaction.com/dataCreate.php',
+		update: 'http://extjsinaction.com/dataUpdate.php',
+		destroy: 'http://extjsinaction.com/dataDelete.php'
+	}
 });
 
 var recordFields = [{
@@ -23,10 +28,11 @@ var recordFields = [{
 }, {
 	name: 'zipcode',
 	mapping: 'zip'
-}, {
-	name: 'newRecordId',
-	mapping: 'newRecordId'
 }];
+
+var writer = new Ext.data.JsonWriter({
+	writeAllFields: true
+});
 
 var remoteJsonStore = new Ext.data.JsonStore({
 	proxy: remoteProxy,
@@ -36,7 +42,15 @@ var remoteJsonStore = new Ext.data.JsonStore({
 	totalProperty: 'totalCount',
 	remoteSort: true,
 	fields: recordFields,
-	idProperty: 'id'
+	idProperty: 'id',
+	autoSave: false,
+	successProperty: 'success',
+	writer: writer,
+	listeners: {
+		exception: function() {
+			console.info(arguments);
+		}
+	}
 });
 
 var textFieldEditor = new Ext.form.TextField();
@@ -75,6 +89,7 @@ var columnModel = [{
 	header: 'Street Address',
 	dataIndex: 'street',
 	sortable: true,
+	id: 'addressCol',
 	editor: textFieldEditor
 }, {
 	header: 'City',
@@ -93,12 +108,64 @@ var columnModel = [{
 	editor: numberFieldEditor
 }];
 
+var onDelete = function() {
+	var grid = Ext.getCmp('myEditorGrid');
+	var selected = grid.getSelectionModel().getSelectedCell();
+	var recordToDelete = grid.store.getAt(selected[0]);
+	grid.store.remove(recordToDelete);
+};
+
+var onInsertRecord = function() {
+	var newRecord = new remoteJsonStore.recordType({
+		newRecordId: Ext.id()
+	});
+	var grid = Ext.getCmp('myEditorGrid');
+	var selectedCell = grid.getSelectionModel().getSelectedCell();
+	var selectedRowIndex = selectedCell[0];
+	remoteJsonStore.insert(selectedRowIndex, newRecord);
+	grid.startEditing(selectedRowIndex, 0);
+}
+
+var doCellCtxMenu = function(editorGrid,
+	rowIndex, cellIndex, evtObj) {
+	evtObj.stopEvent();
+	if (!editorGrid.rowCtxMenu) {
+		editorGrid.rowCtxMenu = new Ext.menu.Menu({
+			items: [{
+				text: 'Insert Record',
+				handler: onInsertRecord
+			}, {
+				text: 'Delete Record',
+				handler: onDelete
+			}]
+		});
+	}
+	editorGrid.getSelectionModel().select(rowIndex, cellIndex);
+	editorGrid.rowCtxMenu.showAt(evtObj.getXY());
+};
+
 var pagingToolbar = {
 	xtype: 'paging',
 	store: remoteJsonStore,
 	pageSize: 50,
-	displayInfo: true
+	displayInfo: true,
+	items: [
+		'-', {
+			text: 'Save Changes',
+			handler: function() {
+				remoteJsonStore.save();
+			}
+		},
+		'-', {
+			text: 'Reject Changes',
+			handler: function() {
+				remoteJsonStore.rejectChanges();
+			}
+		},
+		'-'
+	]
 };
+
 var grid = {
 	xtype: 'editorgrid',
 	columns: columnModel,
@@ -106,7 +173,11 @@ var grid = {
 	store: remoteJsonStore,
 	loadMask: true,
 	bbar: pagingToolbar,
+	autoExpandColumn: 'addressCol',
 	stripeRows: true,
+	listeners: {
+		cellcontextmenu: doCellCtxMenu
+	},
 	viewConfig: {
 		forceFit: true
 	}
